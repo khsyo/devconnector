@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://actkhs:pb25052005@devconnector-x7azn.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mySecretToken"
+}
