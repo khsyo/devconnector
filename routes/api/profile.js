@@ -100,14 +100,14 @@ router.post(
           { new: true }
         );
 
-        return res.json({ profile });
+        return res.json(profile);
       }
 
       //create
       profile = new Profile(profileFields);
       await profile.save();
 
-      return res.json({ profile });
+      return res.json(profile);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
