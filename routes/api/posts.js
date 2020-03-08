@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {
-  check,
-  validationResult
-} = require("express-validator");
+const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 
 const Post = require("../../models/Post");
@@ -19,8 +16,8 @@ router.post(
     auth,
     [
       check("text", "Text is required")
-      .not()
-      .isEmpty()
+        .not()
+        .isEmpty()
     ]
   ],
   async (req, res) => {
@@ -195,8 +192,8 @@ router.post(
     auth,
     [
       check("text", "Text is required")
-      .not()
-      .isEmpty()
+        .not()
+        .isEmpty()
     ]
   ],
   async (req, res) => {
@@ -246,7 +243,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
 
     // Pull out comment
     const comment = await post.comments.find(
-      comment => comment.id === req.params.comment_id
+      comment => comment.id.toString() === req.params.comment_id
     );
 
     // Make sure comment exists
@@ -264,11 +261,13 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     }
 
     // Get remove index to remove the comment
-    let removeIndex = post.comments
-      .map(comment => comment.user.toString())
-      .indexOf(req.user.id);
+    // let removeIndex = post.comments
+    //   .map(comment => comment.user.toString())
+    //   .indexOf(req.user.id);
 
-    post.comments.splice(removeIndex, 1);
+    // post.comments.splice(removeIndex, 1);
+
+    comment.remove();
 
     await post.save();
 
